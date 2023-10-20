@@ -19,9 +19,10 @@ import dados.Ludoteca;
 public class ACMEGames {
 
     private Scanner sc;
-    private Ludoteca ludoteca;
     private BufferedReader streamEntrada;
 
+    private Ludoteca ludoteca;
+    
     public ACMEGames() {
         try {
             streamEntrada = new BufferedReader(new FileReader("dadosin.txt"));
