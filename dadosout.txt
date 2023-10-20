@@ -1,0 +1,15 @@
+1:Civilization V,R$ 321.27
+1:God of War Ragnarok,R$ 236.65
+1:The Sims 4,R$ 71.54
+1:Super Mario Odissey,R$ 318.88
+2:Jogo da Vida,R$ 206.28
+2:Xadrez,R$ 20724.74
+3:Jogo da Vida,1970,R$ 121.34,70,R$ 206.28
+4:Civilization V,2014,R$ 188.98,PS4,Estrategia,R$ 321.27
+4:The Sims 4,2014,R$ 55.03,PC,Simulacao,R$ 71.54
+5:God of War Ragnarok,2022,R$ 215.14,PS5,Acao,R$ 236.65
+5:Super Mario Odissey,2017,R$ 289.89,Switch,Acao,R$ 318.88
+6:R$ 21879.36
+7:Xadrez,R$ 20724.74
+8:R$ 2761.82,Super Mario Odissey,2017,R$ 289.89,Switch,Acao,R$ 318.88
+9:Xadrez,-204
