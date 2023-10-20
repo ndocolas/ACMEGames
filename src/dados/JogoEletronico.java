@@ -19,14 +19,10 @@ public class JogoEletronico extends Jogo {
 	@Override
 	public double calculaPrecoFinal() {
 		switch (categoria) {
-			case ACT:
-				return (precoBase * 1.1);
-			case SIM:
-				return (precoBase * 1.3);
-			case STR:
-				return (precoBase * 1.7);
-			default:
-				return precoBase;
+			case ACT -> {return (precoBase * 1.1);}
+			case SIM -> {return (precoBase * 1.3);}
+			case STR -> {return (precoBase * 1.7);}
+			default -> {return precoBase;}
 		}
 	}
 	

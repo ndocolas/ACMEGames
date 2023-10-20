@@ -12,20 +12,12 @@ public enum Categoria {
 		this.nome = nome;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
 	public static boolean isValid(Categoria cat) {
 		switch (cat) {
-			case ACT:
-				return true;
-			case STR:
-				return true;
-			case SIM:
-				return true;
-			default:
-				return false;
+			case ACT -> {return true;}
+			case STR -> {return true;}
+			case SIM -> {return true;}
+			default -> {return false;}
 		}
 	}
 
@@ -41,4 +33,7 @@ public enum Categoria {
 				return null;
 		}
 	}
+	
+	public String getNome() {return nome;}
+
 }
