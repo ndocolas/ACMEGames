@@ -93,8 +93,7 @@ public class Ludoteca implements Iterador {
 		for (Jogo jogo : listaJogos) {
 			contador += jogo.getPrecoBase();
 		}
-		contador /= listaJogos.size();
-		return contador;
+		return contador /= listaJogos.size();
 	}
 
 	public Jogo jogoMaisProximoPrecoBase() {

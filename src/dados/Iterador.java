@@ -1,6 +1,6 @@
 package dados;
 
-public abstract interface Iterador {
+public interface Iterador {
 
 	void reset();
 	boolean hasNext();
