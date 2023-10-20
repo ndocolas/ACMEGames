@@ -53,22 +53,18 @@ public class ACMEGames {
     }
 
     private void cadastraJogosEletronico() {
-        String linha, nome;
-        int ano;
-        double precoBase;
-        String plataforma;
-        Categoria categoria;
+        String linha;
         try {
             while ((linha = streamEntrada.readLine()) != null) {
                 if (linha.equals("-1")) break;
 
                 Scanner scanner = new Scanner(linha).useDelimiter(";");
 
-                nome = scanner.next();
-                ano = scanner.nextInt();
-                precoBase = scanner.nextDouble();
-                plataforma = scanner.next();
-                categoria = Categoria.valor(scanner.next());
+                String nome = scanner.next();
+                int ano = scanner.nextInt();
+                double precoBase = scanner.nextDouble();
+                String plataforma = scanner.next();
+                Categoria categoria = Categoria.valor(scanner.next());
 
                 JogoEletronico j = new JogoEletronico(nome, ano, precoBase, plataforma, categoria);
 
@@ -86,19 +82,16 @@ public class ACMEGames {
     }
 
     private void cadastraJogosTabuleiro() {
-        String nome, linha;
-        int ano;
-        double precoBase;
-        int numeroPecas;
+        String linha;
         try {
             while ((linha = streamEntrada.readLine()) != null) {
                 if (linha.equals("-1")) break;
 
                 Scanner scanner = new Scanner(linha).useDelimiter(";");
-                nome = scanner.next();
-                ano = scanner.nextInt();
-                precoBase = scanner.nextDouble();
-                numeroPecas = scanner.nextInt();
+                String nome = scanner.next();
+                int ano = scanner.nextInt();
+                double precoBase = scanner.nextDouble();
+                int numeroPecas = scanner.nextInt();
 
                 JogoTabuleiro j = new JogoTabuleiro(nome, ano, precoBase, numeroPecas);
                 if (ludoteca.addJogo(j)) {
@@ -197,7 +190,7 @@ public class ACMEGames {
         try {
             if (jogoMaisAntigo == null) throw new NullPointerException();
 
-            System.out.println("9:" + jogoMaisAntigo.getNome() + "," + jogoMaisAntigo.getAno());
+            System.out.println(String.format("9:%s,%d", jogoMaisAntigo.getNome(), jogoMaisAntigo.getAno()));
         } catch (NullPointerException e) {
             System.out.println("9:Nenhum jogo encontrado.");
         }
