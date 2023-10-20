@@ -183,18 +183,24 @@ public class ACMEGames {
 
     private void jogoMaisProximoPrecoBase() {
         Jogo j = ludoteca.jogoMaisProximoPrecoBase();
-        if (j != null) {
+        try {
+            if (j == null) {
+                throw new NullPointerException();
+            }
             System.out.println(String.format("8:R$ %.2f,%s", ludoteca.mediaPrecoBase(), j.getDescricao()));
-        } else {
+        } catch (NullPointerException e) {
             System.out.println("8:Nenhum jogo encontrado.");
         }
     }
 
     private void mostrarDadosJogoTabuleiroAntigo() {
         JogoTabuleiro jogoMaisAntigo = ludoteca.jogoMaisAntigo();
-        if(jogoMaisAntigo!=null) {
+        try {
+            if (jogoMaisAntigo == null) {
+                throw new NullPointerException();
+            }
             System.out.println("9:" + jogoMaisAntigo.getNome() + "," + jogoMaisAntigo.getAno());
-        } else {
+        } catch (NullPointerException e) {
             System.out.println("9:Nenhum jogo encontrado.");
         }
     }
