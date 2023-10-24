@@ -1,11 +1,13 @@
 package dados;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Ludoteca implements Iterador {
 
 	private int contador;
-	private ArrayList<Jogo> listaJogos;
+	private List<Jogo> listaJogos;
 
 	public Ludoteca() {
 		listaJogos = new ArrayList<>();
@@ -20,7 +22,7 @@ public class Ludoteca implements Iterador {
 		}
 		return listaJogos.add(jogo);
 	}
-
+	//CONTINUAR DAQYU
 	public Jogo consultaPorNome(String nome) {
 		for (Jogo jogo : listaJogos) {
 			if (nome.equals(jogo.getNome())) {
@@ -29,27 +31,20 @@ public class Ludoteca implements Iterador {
 		}
 		return null;
 	}
-
-	public ArrayList<Jogo> consultaPorAno(int ano) {
-		ArrayList<Jogo> listaJogosAno = new ArrayList<>();
-		for (Jogo jogo : listaJogos) {
-			if (jogo.getAno() == ano) {
-				listaJogosAno.add(jogo);
-			}
-		}
+	
+	public List<Jogo> consultaPorAno(int ano) {
+		List<Jogo> listaJogosAno = listaJogos.stream()
+		.filter(e -> e.getAno() == ano)
+		.collect(Collectors.toList());
 		return listaJogosAno;
 	}
 
-	public ArrayList<JogoEletronico> consultaPorCategoria(Categoria categoria) {
-		ArrayList<JogoEletronico> listaJogosEletronicos = new ArrayList<>();
-		for (Jogo jogo : listaJogos) {
-			if (jogo instanceof JogoEletronico j) {
-				if (j.getCategoria().equals(categoria)) {
-					listaJogosEletronicos.add(j);
-				}
-			}
-		}
-		return listaJogosEletronicos;
+	public List<Jogo> consultaPorCategoria(Categoria categoria) {
+		return listaJogos.stream()
+		.filter(JogoEletronico.class::isInstance)
+		.map(JogoEletronico.class::cast)
+		.filter(e -> e.getCategoria().equals(categoria))
+		.collect(Collectors.toList());
 	}
 
 	public JogoTabuleiro jogoMaisCaro() {
@@ -93,7 +88,8 @@ public class Ludoteca implements Iterador {
 		for (Jogo jogo : listaJogos) {
 			contador += jogo.getPrecoBase();
 		}
-		return contador /= listaJogos.size();
+		contador /= listaJogos.size();
+		return contador;
 	}
 
 	public Jogo jogoMaisProximoPrecoBase() {
