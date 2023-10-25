@@ -16,18 +16,14 @@ public class Ludoteca implements Iterador {
 
 	public boolean addJogo(Jogo jogo) {
 		for (Jogo x : listaJogos) {
-			if (jogo.getNome().equals(x.getNome())) {
-				return false;
-			}
+		if (jogo.getNome().equals(x.getNome())) return false;
 		}
 		return listaJogos.add(jogo);
 	}
 	
 	public Jogo consultaPorNome(String nome) {
 		for (Jogo jogo : listaJogos) {
-			if (nome.equals(jogo.getNome())) {
-				return jogo;
-			}
+		if (nome.equals(jogo.getNome())) return jogo;
 		}
 		return null;
 	}
@@ -51,12 +47,11 @@ public class Ludoteca implements Iterador {
 		double numero = 0.0;
 		JogoTabuleiro jogoMaior = null;
 		for (Jogo jogo : listaJogos) {
-			if (jogo instanceof JogoTabuleiro j) {
-				if (j.calculaPrecoFinal() > numero) {
-					numero = j.calculaPrecoFinal();
-					jogoMaior = j;
-				}
-			}
+			if (jogo instanceof JogoTabuleiro j) 
+			 if (j.calculaPrecoFinal() > numero) {
+				numero = j.calculaPrecoFinal();
+				jogoMaior = j;		
+			 }
 		}
 		return jogoMaior;
 	}
@@ -65,12 +60,11 @@ public class Ludoteca implements Iterador {
 		int ano = 10000;
 		JogoTabuleiro jogoMaisAntigo = null;
 		for (Jogo jogo : listaJogos) {
-			if(jogo instanceof JogoTabuleiro j) {
-				if(j.getAno()<ano) {
-					ano = j.getAno();
-					jogoMaisAntigo = j;
-				}
-			}
+			if(jogo instanceof JogoTabuleiro j) 
+			 if(j.getAno()<ano) {
+				ano = j.getAno();
+				jogoMaisAntigo = j;
+			 }		
 		}
 		return jogoMaisAntigo;
 	}
@@ -88,8 +82,7 @@ public class Ludoteca implements Iterador {
 		for (Jogo jogo : listaJogos) {
 			contador += jogo.getPrecoBase();
 		}
-		contador /= listaJogos.size();
-		return contador;
+		return (contador / listaJogos.size());
 	}
 
 	public Jogo jogoMaisProximoPrecoBase() {
