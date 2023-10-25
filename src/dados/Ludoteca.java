@@ -17,7 +17,7 @@ public class Ludoteca implements Iterador {
 
 	public boolean addJogo(Jogo jogo) {
 		for (Jogo x : listaJogos) {
-		if (jogo.getNome().equals(x.getNome())) return false;
+			if (jogo.getNome().equals(x.getNome())) return false;
 		}
 		return listaJogos.add(jogo);
 	}
