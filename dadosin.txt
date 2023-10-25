@@ -1,11 +1,11 @@
-Civilization V;2014;188.98;PS4;Estrategia
-God of War Ragnarok;2022;215.14;PS5;Acao
-The Sims 4;2014;55.03;PC;Simulacao
-Super Mario Odissey;2017;289.89;Switch;Acao
+God of War Ragnarok;2022;215.14;PS4;Acao
+Pokemon Go 4;2016;1.01;Celular;Acao
+God of War Ragnarok;2015;222.22;PS3;Simulacao
+Pacman;1980;62.23;Atari;Acao
 -1
-Jogo da Vida;1970;121.34;70
-Xadrez;-204;15700.56;32
+God of War Ragnarok;-3000;47.77;24
+Pacman;2023;78.87;4
 -1
-Jogo da Vida
-2014
-Acao
+Space Invaders
+1978
+Estrategia

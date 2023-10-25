@@ -1,6 +1,7 @@
 package dados;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,17 +23,16 @@ public class Ludoteca implements Iterador {
 	}
 	
 	public Jogo consultaPorNome(String nome) {
-		for (Jogo jogo : listaJogos) {
-		if (nome.equals(jogo.getNome())) return jogo;
-		}
-		return null;
+		return listaJogos.stream()
+		.filter(jogo -> nome.equals(jogo.getNome()))
+		.findFirst()
+		.orElse(null);
 	}
 	
 	public List<Jogo> consultaPorAno(int ano) {
-		List<Jogo> listaJogosAno = listaJogos.stream()
+		return listaJogos.stream()
 		.filter(e -> e.getAno() == ano)
 		.collect(Collectors.toList());
-		return listaJogosAno;
 	}
 
 	public List<Jogo> consultaPorCategoria(Categoria categoria) {
@@ -44,63 +44,40 @@ public class Ludoteca implements Iterador {
 	}
 
 	public JogoTabuleiro jogoMaisCaro() {
-		double numero = 0.0;
-		JogoTabuleiro jogoMaior = null;
-		for (Jogo jogo : listaJogos) {
-			if (jogo instanceof JogoTabuleiro j) 
-			 if (j.calculaPrecoFinal() > numero) {
-				numero = j.calculaPrecoFinal();
-				jogoMaior = j;		
-			 }
-		}
-		return jogoMaior;
+   		return listaJogos.stream()
+        .filter(JogoEletronico.class::isInstance)
+        .map(jogo -> (JogoTabuleiro) jogo)
+        .max(Comparator.comparingDouble(JogoTabuleiro::calculaPrecoFinal))
+        .orElse(null);
 	}
 
 	public JogoTabuleiro jogoMaisAntigo() {
-		int ano = 10000;
-		JogoTabuleiro jogoMaisAntigo = null;
-		for (Jogo jogo : listaJogos) {
-			if(jogo instanceof JogoTabuleiro j) 
-			 if(j.getAno()<ano) {
-				ano = j.getAno();
-				jogoMaisAntigo = j;
-			 }		
-		}
-		return jogoMaisAntigo;
+		return listaJogos.stream()
+		.filter(jogo -> jogo instanceof JogoTabuleiro)
+		.map(jogo -> (JogoTabuleiro) jogo)
+		.min(Comparator.comparingInt(JogoTabuleiro::getAno))
+		.orElse(null);
 	}
 
 	public double somatorioJogos() {
-		double contador = 0.0;
-		for (Jogo jogo : listaJogos) {
-			contador += jogo.calculaPrecoFinal();
-		}
-		return contador;
+		return listaJogos.stream()
+		.mapToDouble(Jogo::calculaPrecoFinal)
+		.sum();
 	}
 
 	public double mediaPrecoBase() {
-		double contador = 0.0;
-		for (Jogo jogo : listaJogos) {
-			contador += jogo.getPrecoBase();
-		}
-		return (contador / listaJogos.size());
+		return listaJogos.stream()
+		.mapToDouble(Jogo::getPrecoBase)
+		.sum()/listaJogos.size();
 	}
 
 	public Jogo jogoMaisProximoPrecoBase() {
-		Jogo maiorJogo = null;
-		double diferencaMinima = Double.MAX_VALUE;
-		for (Jogo jogo : listaJogos) {
-			double diferenca = Math.abs(jogo.getPrecoBase() - mediaPrecoBase());
-			if (diferenca < diferencaMinima) {
-				diferencaMinima = diferenca;
-				maiorJogo = jogo;
-			}
-		}
-		return maiorJogo;
+		return listaJogos.stream()
+		.min(Comparator.comparingDouble(jogo -> Math.abs(jogo.getPrecoBase() - mediaPrecoBase())))
+		.orElse(null);
 	}
 
-	public boolean isEmpty() {
-		return listaJogos.isEmpty();
-	}
+	public boolean isEmpty() {return listaJogos.isEmpty();}
 
 	@Override
 	public void reset() {
