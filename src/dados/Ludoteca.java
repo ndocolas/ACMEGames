@@ -45,10 +45,10 @@ public class Ludoteca implements Iterador {
 
 	public JogoTabuleiro jogoMaisCaro() {
    		return listaJogos.stream()
-        .filter(JogoEletronico.class::isInstance)
-        .map(jogo -> (JogoTabuleiro) jogo)
-        .max(Comparator.comparingDouble(JogoTabuleiro::calculaPrecoFinal))
-        .orElse(null);
+		.filter(JogoEletronico.class::isInstance)
+		.map(jogo -> (JogoTabuleiro) jogo)
+		.max(Comparator.comparingDouble(JogoTabuleiro::calculaPrecoFinal))
+		.orElse(null);
 	}
 
 	public JogoTabuleiro jogoMaisAntigo() {
