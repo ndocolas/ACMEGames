@@ -53,9 +53,8 @@ public class ACMEGames {
         Categoria categoria;
         try {
             while ((linha = streamEntrada.readLine()) != null) {
-                if (linha.equals("-1")) {
-                    break;
-                }
+                if (linha.equals("-1")) break;
+                
 
                 Scanner scanner = new Scanner(linha).useDelimiter(";");
 
@@ -81,27 +80,22 @@ public class ACMEGames {
     }
 
     private void cadastraJogosTabuleiro() {
-        String nome, linha;
-        int ano;
-        double precoBase;
-        int numeroPecas;
+        String linha;
         try {
             while ((linha = streamEntrada.readLine()) != null) {
-                if (linha.equals("-1")) {
-                    break;
-                }
+                if (linha.equals("-1")) break;
+
                 Scanner scanner = new Scanner(linha).useDelimiter(";");
-                nome = scanner.next();
-                ano = scanner.nextInt();
-                precoBase = scanner.nextDouble();
-                numeroPecas = scanner.nextInt();
+                String nome = scanner.next();
+                int ano = scanner.nextInt();
+                double precoBase = scanner.nextDouble();
+                int numeroPecas = scanner.nextInt();
 
                 JogoTabuleiro j = new JogoTabuleiro(nome, ano, precoBase, numeroPecas);
-                if (ludoteca.addJogo(j)) {
-                    System.out.println(String.format("2:%s,R$ %.2f", j.getNome(), j.calculaPrecoFinal()));
-                } else {
-                    System.out.println(String.format("2:Erro-jogo com nome repetido: %s", j.getNome()));
-                }
+
+                if (ludoteca.addJogo(j)) System.out.println(String.format("2:%s,R$ %.2f", j.getNome(), j.calculaPrecoFinal()));
+                else System.out.println(String.format("2:Erro-jogo com nome repetido: %s", j.getNome()));
+                
                 scanner.close();
             }
         } catch (Exception e) {
@@ -110,89 +104,50 @@ public class ACMEGames {
     }
 
     private void lerDadosJogoNome() {
-        try {
-            Jogo jogo = ludoteca.consultaPorNome(sc.nextLine());
-            if (jogo == null) {
-                throw new NullPointerException();
-            }
-            System.out.println("3:" + jogo.getDescricao());
-        } catch (NullPointerException e) {
-            System.out.println("3:Nome inexistente.");
-        }
+        Jogo jogo = ludoteca.consultaPorNome(sc.nextLine());
+        if(!(jogo == null)) System.out.println("3:" + jogo.getDescricao());
+        else System.out.println("3:Nome inexistente.");
     }
 
     private void lerDadosAno() {
-        try {
-            List<Jogo> listaJogosAno = ludoteca.consultaPorAno(sc.nextInt());
-            if (listaJogosAno == null) {
-                throw new NoSuchElementException();
-            }
-            if (!(listaJogosAno.isEmpty())) {
-                for (Jogo jogo : listaJogosAno) {
-                    System.out.println("4:" + jogo.getDescricao());
-                }
-            } else {
-                System.out.println("4:Nenhum jogo encontrado.");
-            }
-            sc.nextLine();
-        } catch (NoSuchElementException e) {
-            System.out.println("4:Ano nao encontrado.");
-        } catch (Exception e) {
-        }
+        List<Jogo> listaJogosAno = ludoteca.consultaPorAno(sc.nextInt());
+        
+        if (!(listaJogosAno.isEmpty())) listaJogosAno.forEach(jogo -> System.out.println("4:" + jogo.getDescricao()));
+        else System.out.println("4:Nenhum jogo encontrado.");
+            
+        sc.nextLine();
+
     }
 
     private void dadosJogoEletronico() {
         String categoria = sc.nextLine();
-        try {
-            if (Categoria.isValid(Categoria.valor(categoria)) == false) {
-                throw new NullPointerException();
-            }
-            List<Jogo> listaJogoEletronicos = ludoteca.consultaPorCategoria(Categoria.valor(categoria));
-            if (!(listaJogoEletronicos.isEmpty())) {
-                listaJogoEletronicos.forEach(e -> System.out.println("5:" + e.getDescricao()));
-            } else {
-                System.out.println("5:Nenhum jogo encontrado.");
-            }
-        } catch (NullPointerException e) {
-            System.out.println("5:Categoria inexistente.");
-        }
+        List<Jogo> listaJogoEletronicos = ludoteca.consultaPorCategoria(Categoria.valor(categoria));
+        if (!(listaJogoEletronicos.isEmpty())) listaJogoEletronicos.forEach(e -> System.out.println("5:" + e.getDescricao()));
+        else System.out.println("5:Nenhum jogo encontrado.");
+
     }
 
     private void somatorioJogos() {
-        if (!ludoteca.isEmpty()) {
-            System.out.println(String.format("6:R$ %.2f", ludoteca.somatorioJogos()));
-        } else {
-            System.out.println("6:Nenhum jogo encontrado.");
-        }
+        if (!ludoteca.isEmpty())  System.out.println(String.format("6:R$ %.2f", ludoteca.somatorioJogos()));
+        else System.out.println("6:Nenhum jogo encontrado.");
+        
     }
 
     private void jogoTabuleiroMaisCaro() {
-        try {
-            JogoTabuleiro j = ludoteca.jogoMaisCaro();
-            if (j == null) {
-                throw new NullPointerException();
-            }
-            System.out.println(String.format("7:%s,R$ %.2f", j.getNome(), j.calculaPrecoFinal()));
-        } catch (NullPointerException e) {
-            System.out.println("7:Nenhum jogo encontrado.");
-        }
+        JogoTabuleiro j = ludoteca.jogoMaisAntigo();
+        if(!(j == null)) System.out.println(String.format("7:%s,R$ %.2f", j.getNome(), j.calculaPrecoFinal()));
+        else System.out.println("7:Nenhum jogo encontrado.");
     }
 
     private void jogoMaisProximoPrecoBase() {
         Jogo j = ludoteca.jogoMaisProximoPrecoBase();
-        if (j != null) {
-            System.out.println(String.format("8:R$ %.2f,%s", ludoteca.mediaPrecoBase(), j.getDescricao()));
-        } else {
-            System.out.println("8:Nenhum jogo encontrado.");
-        }
+        if (j != null) System.out.println(String.format("8:R$ %.2f,%s", ludoteca.mediaPrecoBase(), j.getDescricao()));
+        else System.out.println("8:Nenhum jogo encontrado.");
     }
 
     private void mostrarDadosJogoTabuleiroAntigo() {
         JogoTabuleiro jogoMaisAntigo = ludoteca.jogoMaisAntigo();
-        if(jogoMaisAntigo!=null) {
-            System.out.println("9:" + jogoMaisAntigo.getNome() + "," + jogoMaisAntigo.getAno());
-        } else {
-            System.out.println("9:Nenhum jogo encontrado.");
-        }
+        if(jogoMaisAntigo!=null) System.out.println("9:" + jogoMaisAntigo.getNome() + "," + jogoMaisAntigo.getAno());
+        else System.out.println("9:Nenhum jogo encontrado.");
     }
 }

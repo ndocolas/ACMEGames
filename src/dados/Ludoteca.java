@@ -22,7 +22,7 @@ public class Ludoteca implements Iterador {
 		}
 		return listaJogos.add(jogo);
 	}
-	//CONTINUAR DAQYU
+	
 	public Jogo consultaPorNome(String nome) {
 		for (Jogo jogo : listaJogos) {
 			if (nome.equals(jogo.getNome())) {
@@ -116,11 +116,7 @@ public class Ludoteca implements Iterador {
 
 	@Override
 	public boolean hasNext() {
-		if (contador == listaJogos.size()) {
-			return false;
-		} else {
-			return true;
-		}
+		return (contador == listaJogos.size());
 	}
 
 	@Override

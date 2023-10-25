@@ -23,14 +23,10 @@ public enum Categoria {
 
 	public static Categoria valor(String x) {
 		switch (x) {
-			case "Estrategia":
-				return STR;
-			case "Acao":
-				return ACT;
-			case "Simulacao":
-				return SIM;
-			default:
-				return null;
+			case "Estrategia" -> {return STR;}
+			case "Acao" -> {return ACT;}
+			case "Simulacao" -> {return SIM;}
+			default -> {return null;}
 		}
 	}
 	
