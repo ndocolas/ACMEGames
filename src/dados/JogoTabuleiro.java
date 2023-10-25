@@ -15,17 +15,11 @@ public class JogoTabuleiro extends Jogo {
 	}
 
 	@Override
-	public double calculaPrecoFinal() {
-		double precoPeca = 0.01*precoBase;
-		precoPeca*=numeroPecas;
-		return precoBase+precoPeca;
-	}
-	
+	public double calculaPrecoFinal() {return ((0.01*precoBase) * numeroPecas) + precoBase;}
+	public int getNumeroPecas() {return numeroPecas;}
+
 	@Override
 	public String getDescricao() {
 		return String.format("%s,%d,R$ %.2f,%d,R$ %.2f", nome, ano, precoBase, numeroPecas, calculaPrecoFinal());
 	}
-
-	public int getNumeroPecas() {return numeroPecas;}
-
 }

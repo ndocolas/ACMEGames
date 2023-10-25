@@ -7,7 +7,6 @@ import java.io.PrintStream;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Locale;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import dados.Categoria;
@@ -33,7 +32,7 @@ public class ACMEGames {
         }
         Locale.setDefault(Locale.ENGLISH);
         sc.useLocale(Locale.ENGLISH);
-        
+
         ludoteca = new Ludoteca();
     }
 

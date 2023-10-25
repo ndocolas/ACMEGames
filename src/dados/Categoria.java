@@ -12,15 +12,6 @@ public enum Categoria {
 		this.nome = nome;
 	}
 
-	public static boolean isValid(Categoria cat) {
-		switch (cat) {
-			case ACT -> {return true;}
-			case STR -> {return true;}
-			case SIM -> {return true;}
-			default -> {return false;}
-		}
-	}
-
 	public static Categoria valor(String x) {
 		switch (x) {
 			case "Estrategia" -> {return STR;}
