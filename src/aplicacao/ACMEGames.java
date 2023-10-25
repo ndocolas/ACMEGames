@@ -46,31 +46,23 @@ public class ACMEGames {
     }
 
     private void cadastraJogosEletronico() {
-        String linha, nome;
-        int ano;
-        double precoBase;
-        String plataforma;
-        Categoria categoria;
+        String linha;
         try {
             while ((linha = streamEntrada.readLine()) != null) {
                 if (linha.equals("-1")) break;
-                
 
                 Scanner scanner = new Scanner(linha).useDelimiter(";");
 
-                nome = scanner.next();
-                ano = scanner.nextInt();
-                precoBase = scanner.nextDouble();
-                plataforma = scanner.next();
-                categoria = Categoria.valor(scanner.next());
+                String nome = scanner.next();
+                int ano = scanner.nextInt();
+                double precoBase = scanner.nextDouble();
+                String plataforma = scanner.next();
+                Categoria categoria = Categoria.valor(scanner.next());
 
                 JogoEletronico j = new JogoEletronico(nome, ano, precoBase, plataforma, categoria);
 
-                if (ludoteca.addJogo(j)) {
-                    System.out.println(String.format("1:%s,R$ %.2f", j.getNome(), j.calculaPrecoFinal()));
-                } else {
-                    System.out.println(String.format("1:Erro-jogo com nome repetido: %s", j.getNome()));
-                }
+                if (ludoteca.addJogo(j)) System.out.println(String.format("1:%s,R$ %.2f", j.getNome(), j.calculaPrecoFinal()));
+                else System.out.println(String.format("1:Erro-jogo com nome repetido: %s", j.getNome()));
 
                 scanner.close();
             }
