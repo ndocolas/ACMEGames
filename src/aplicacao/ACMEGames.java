@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.PrintStream;
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -30,6 +31,9 @@ public class ACMEGames {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Locale.setDefault(Locale.ENGLISH);
+        sc.useLocale(Locale.ENGLISH);
+        
         ludoteca = new Ludoteca();
     }
 
@@ -108,7 +112,6 @@ public class ACMEGames {
         else System.out.println("4:Nenhum jogo encontrado.");
             
         sc.nextLine();
-
     }
 
     private void dadosJogoEletronico() {
@@ -116,13 +119,11 @@ public class ACMEGames {
         List<Jogo> listaJogoEletronicos = ludoteca.consultaPorCategoria(Categoria.valor(categoria));
         if (!(listaJogoEletronicos.isEmpty())) listaJogoEletronicos.forEach(e -> System.out.println("5:" + e.getDescricao()));
         else System.out.println("5:Nenhum jogo encontrado.");
-
     }
 
     private void somatorioJogos() {
         if (!ludoteca.isEmpty())  System.out.println(String.format("6:R$ %.2f", ludoteca.somatorioJogos()));
         else System.out.println("6:Nenhum jogo encontrado.");
-        
     }
 
     private void jogoTabuleiroMaisCaro() {
