@@ -18,9 +18,10 @@ import dados.Ludoteca;
 public class ACMEGames {
 
     private Scanner sc;
-    private Ludoteca ludoteca;
     private BufferedReader streamEntrada;
 
+    private Ludoteca ludoteca;
+    
     public ACMEGames() {
         try {
             streamEntrada = new BufferedReader(new FileReader("dadosin.txt"));
@@ -55,14 +56,7 @@ public class ACMEGames {
                 if (linha.equals("-1")) break;
 
                 Scanner scanner = new Scanner(linha).useDelimiter(";");
-
-                String nome = scanner.next();
-                int ano = scanner.nextInt();
-                double precoBase = scanner.nextDouble();
-                String plataforma = scanner.next();
-                Categoria categoria = Categoria.valor(scanner.next());
-
-                JogoEletronico j = new JogoEletronico(nome, ano, precoBase, plataforma, categoria);
+                JogoEletronico j = new JogoEletronico(scanner.next(), scanner.nextInt(), scanner.nextDouble(), scanner.next(), Categoria.valor(scanner.next()));
 
                 if (ludoteca.addJogo(j)) System.out.println(String.format("1:%s,R$ %.2f", j.getNome(), j.calculaPrecoFinal()));
                 else System.out.println(String.format("1:Erro-jogo com nome repetido: %s", j.getNome()));
@@ -81,12 +75,7 @@ public class ACMEGames {
                 if (linha.equals("-1")) break;
 
                 Scanner scanner = new Scanner(linha).useDelimiter(";");
-                String nome = scanner.next();
-                int ano = scanner.nextInt();
-                double precoBase = scanner.nextDouble();
-                int numeroPecas = scanner.nextInt();
-
-                JogoTabuleiro j = new JogoTabuleiro(nome, ano, precoBase, numeroPecas);
+                JogoTabuleiro j = new JogoTabuleiro(scanner.next(), scanner.nextInt(), scanner.nextDouble(), scanner.nextInt());
 
                 if (ludoteca.addJogo(j)) System.out.println(String.format("2:%s,R$ %.2f", j.getNome(), j.calculaPrecoFinal()));
                 else System.out.println(String.format("2:Erro-jogo com nome repetido: %s", j.getNome()));
@@ -121,7 +110,7 @@ public class ACMEGames {
     }
 
     private void somatorioJogos() {
-        if (!ludoteca.isEmpty())  System.out.println(String.format("6:R$ %.2f", ludoteca.somatorioJogos()));
+        if (!ludoteca.isEmpty()) System.out.println(String.format("6:R$ %.2f", ludoteca.somatorioJogos()));
         else System.out.println("6:Nenhum jogo encontrado.");
     }
 
