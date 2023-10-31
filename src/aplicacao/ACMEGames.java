@@ -103,8 +103,7 @@ public class ACMEGames {
     }
 
     private void dadosJogoEletronico() {
-        String categoria = sc.nextLine();
-        List<Jogo> listaJogoEletronicos = ludoteca.consultaPorCategoria(Categoria.valor(categoria));
+        List<Jogo> listaJogoEletronicos = ludoteca.consultaPorCategoria(Categoria.valor(sc.nextLine()));
         if (!(listaJogoEletronicos.isEmpty())) listaJogoEletronicos.forEach(e -> System.out.println("5:" + e.getDescricao()));
         else System.out.println("5:Nenhum jogo encontrado.");
     }
