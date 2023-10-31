@@ -114,7 +114,7 @@ public class ACMEGames {
     }
 
     private void jogoTabuleiroMaisCaro() {
-        JogoTabuleiro j = ludoteca.jogoMaisAntigo();
+        JogoTabuleiro j = ludoteca.jogoTabuleiroMaisCaro();
         if(!(j == null)) System.out.println(String.format("7:%s,R$ %.2f", j.getNome(), j.calculaPrecoFinal()));
         else System.out.println("7:Nenhum jogo encontrado.");
     }
@@ -126,7 +126,7 @@ public class ACMEGames {
     }
 
     private void mostrarDadosJogoTabuleiroAntigo() {
-        JogoTabuleiro jogoMaisAntigo = ludoteca.jogoMaisAntigo();
+        JogoTabuleiro jogoMaisAntigo = ludoteca.jogoTabuleiroMaisAntigo();
         if(jogoMaisAntigo!=null) System.out.println("9:" + jogoMaisAntigo.getNome() + "," + jogoMaisAntigo.getAno());
         else System.out.println("9:Nenhum jogo encontrado.");
     }

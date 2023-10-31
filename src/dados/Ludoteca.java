@@ -43,16 +43,16 @@ public class Ludoteca implements Iterador {
 		.collect(Collectors.toList());
 	}
 
-	public JogoTabuleiro jogoMaisCaro() {
+	public JogoTabuleiro jogoTabuleiroMaisCaro() {
    		return listaJogos.stream()
-		.filter(JogoEletronico.class::isInstance)
+		.filter(JogoTabuleiro.class::isInstance)
 		.map(jogo -> (JogoTabuleiro) jogo)
 		.max(Comparator.comparingDouble(JogoTabuleiro::calculaPrecoFinal))
 		.orElse(null);
 	}
 
-	public JogoTabuleiro jogoMaisAntigo() {
-		return listaJogos.stream()
+	public JogoTabuleiro jogoTabuleiroMaisAntigo() {
+		return  listaJogos.stream()
 		.filter(jogo -> jogo instanceof JogoTabuleiro)
 		.map(jogo -> (JogoTabuleiro) jogo)
 		.min(Comparator.comparingInt(JogoTabuleiro::getAno))
