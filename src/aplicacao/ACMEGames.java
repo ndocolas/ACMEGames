@@ -16,11 +16,6 @@ import dados.JogoTabuleiro;
 import dados.Ludoteca;
 
 public class ACMEGames {
-    
-    /*
-     * meu pai e muito legal e querido
-     */
-
 
     private Scanner sc;
     private BufferedReader streamEntrada;
