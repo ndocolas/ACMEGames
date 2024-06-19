@@ -24,10 +24,8 @@ public class ACMEGames {
     
     public ACMEGames() {
         try {
-            streamEntrada = new BufferedReader(new FileReader("dadosin.txt"));
-            sc = new Scanner(streamEntrada);
-            PrintStream streamSaida = new PrintStream(new File("dadosout.txt"), Charset.defaultCharset());
-            System.setOut(streamSaida);
+            sc = new Scanner((streamEntrada = new BufferedReader(new FileReader("dadosin.txt"))));
+            System.setOut(new PrintStream(new File("dadosout.txt"), Charset.defaultCharset()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,6 +33,7 @@ public class ACMEGames {
         sc.useLocale(Locale.ENGLISH);
 
         ludoteca = new Ludoteca();
+        executa();
     }
 
     public void executa() {

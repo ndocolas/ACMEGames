@@ -16,9 +16,7 @@ public class Ludoteca implements Iterador {
 	}
 
 	public boolean addJogo(Jogo jogo) {
-		for (Jogo x : listaJogos) {
-			if (jogo.getNome().equals(x.getNome())) return false;
-		}
+		if (listaJogos.stream().anyMatch(x -> jogo.getNome().equals(x.getNome()))) return false;
 		return listaJogos.add(jogo);
 	}
 	
@@ -80,21 +78,16 @@ public class Ludoteca implements Iterador {
 	public boolean isEmpty() {return listaJogos.isEmpty();}
 
 	@Override
-	public void reset() {
-		contador = 0;
-	}
+	public void reset() {contador = 0;}
 
 	@Override
-	public boolean hasNext() {
-		return (contador == listaJogos.size());
-	}
+	public boolean hasNext() {return (contador == listaJogos.size());}
 
 	@Override
 	public Object next() {
 		if (contador < listaJogos.size()) {
-			Object o = listaJogos.get(contador);
 			contador++;
-			return o;
+			return listaJogos.get(contador);
 		}
 		return null;
 	}
