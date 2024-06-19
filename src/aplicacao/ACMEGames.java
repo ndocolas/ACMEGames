@@ -26,9 +26,8 @@ public class ACMEGames {
         try {
             sc = new Scanner((streamEntrada = new BufferedReader(new FileReader("dadosin.txt"))));
             System.setOut(new PrintStream(new File("dadosout.txt"), Charset.defaultCharset()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) {}
+        
         Locale.setDefault(Locale.ENGLISH);
         sc.useLocale(Locale.ENGLISH);
 
