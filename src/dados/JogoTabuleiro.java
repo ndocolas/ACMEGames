@@ -1,5 +1,11 @@
 package dados;
 
+import static java.lang.StringTemplate.STR;
+
+import java.text.NumberFormat;
+import java.util.Locale;
+
+@SuppressWarnings("unused")
 public class JogoTabuleiro extends Jogo {
 
 	private String nome;
@@ -20,6 +26,6 @@ public class JogoTabuleiro extends Jogo {
 
 	@Override
 	public String getDescricao() {
-		return String.format("%s,%d,R$ %.2f,%d,R$ %.2f", nome, ano, precoBase, numeroPecas, calculaPrecoFinal());
+		return STR."\{nome}, \{ano}, \{NumberFormat.getCurrencyInstance(Locale.of("pt", "BR")).format(precoBase)}, \{numeroPecas}, \{NumberFormat.getCurrencyInstance(Locale.of("pt", "BR")).format(calculaPrecoFinal())}";
 	}
 }

@@ -1,13 +1,15 @@
-1:God of War Ragnarok,R$ 236.65
-1:Pokemon Go 4,R$ 1.11
-1:Erro-jogo com nome repetido: God of War Ragnarok
-1:Pacman,R$ 68.45
-2:Erro-jogo com nome repetido: God of War Ragnarok
-2:Erro-jogo com nome repetido: Pacman
-3:Nome inexistente.
-4:Nenhum jogo encontrado.
-5:Nenhum jogo encontrado.
-6:R$ 306.22
-7:Nenhum jogo encontrado.
-8:R$ 92.79,Pacman,1980,R$ 62.23,Atari,Acao,R$ 68.45
-9:Nenhum jogo encontrado.
+1:Civilization V,R$ 321,27
+1:God of War Ragnarok,R$ 236,65
+1:The Sims 4,R$ 71,54
+1:Super Mario Odissey,R$ 318,88
+2:Jogo da Vida,R$ 206,28
+2:Xadrez,R$ 20.724,74
+3:Jogo da Vida, 1970, R$ 121,34, 70, R$ 206,28
+4:Civilization V,2014,R$ 188,98,PS4,Estrategia,R$ 321,27
+4:The Sims 4,2014,R$ 55,03,PC,Simulacao,R$ 71,54
+5:God of War Ragnarok,2022,R$ 215,14,PS5,Acao,R$ 236,65
+5:Super Mario Odissey,2017,R$ 289,89,Switch,Acao,R$ 318,88
+6:R$ 21.879,36
+7:Xadrez,R$ 20.724,74
+8:R$ 2.761,82,Super Mario Odissey,2017,R$ 289,89,Switch,Acao,R$ 318,88
+9:Xadrez,-204

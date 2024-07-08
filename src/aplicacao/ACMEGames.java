@@ -1,10 +1,13 @@
 package aplicacao;
 
+import static java.lang.StringTemplate.STR;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.PrintStream;
 import java.nio.charset.Charset;
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -15,6 +18,7 @@ import dados.JogoEletronico;
 import dados.JogoTabuleiro;
 import dados.Ludoteca;
 
+@SuppressWarnings("unused")
 public class ACMEGames {
 
     private Scanner sc;
@@ -26,7 +30,7 @@ public class ACMEGames {
         try {
             sc = new Scanner((streamEntrada = new BufferedReader(new FileReader("dadosin.txt"))));
             System.setOut(new PrintStream(new File("dadosout.txt"), Charset.defaultCharset()));
-        } catch (Exception e) {}
+        } catch (Exception _) {}
         
         Locale.setDefault(Locale.ENGLISH);
         sc.useLocale(Locale.ENGLISH);
@@ -53,17 +57,14 @@ public class ACMEGames {
             while ((linha = streamEntrada.readLine()) != null) {
                 if (linha.equals("-1")) break;
 
-                Scanner scanner = new Scanner(linha).useDelimiter(";");
-                JogoEletronico j = new JogoEletronico(scanner.next(), scanner.nextInt(), scanner.nextDouble(), scanner.next(), Categoria.valor(scanner.next()));
+                var scanner = new Scanner(linha).useDelimiter(";");
+                var j = new JogoEletronico(scanner.next(), scanner.nextInt(), scanner.nextDouble(), scanner.next(), Categoria.valor(scanner.next()));
 
-                if (ludoteca.addJogo(j)) System.out.println(String.format("1:%s,R$ %.2f", j.getNome(), j.calculaPrecoFinal()));
-                else System.out.println(String.format("1:Erro-jogo com nome repetido: %s", j.getNome()));
+                System.out.println(ludoteca.addJogo(j) ? STR."1:\{j.getNome()},\{NumberFormat.getCurrencyInstance(Locale.of("pt", "BR")).format(j.calculaPrecoFinal())}" : STR."1:Erro-jogo com nome repetido: \{j.getNome()}");
 
                 scanner.close();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception _) {}
     }
 
     private void cadastraJogosTabuleiro() {
@@ -72,32 +73,29 @@ public class ACMEGames {
             while ((linha = streamEntrada.readLine()) != null) {
                 if (linha.equals("-1")) break;
 
-                Scanner scanner = new Scanner(linha).useDelimiter(";");
-                JogoTabuleiro j = new JogoTabuleiro(scanner.next(), scanner.nextInt(), scanner.nextDouble(), scanner.nextInt());
+                var scanner = new Scanner(linha).useDelimiter(";");
+                var j = new JogoTabuleiro(scanner.next(), scanner.nextInt(), scanner.nextDouble(), scanner.nextInt());
 
-                if (ludoteca.addJogo(j)) System.out.println(String.format("2:%s,R$ %.2f", j.getNome(), j.calculaPrecoFinal()));
-                else System.out.println(String.format("2:Erro-jogo com nome repetido: %s", j.getNome()));
-                
+                System.out.println((ludoteca.addJogo(j)) ? 
+                STR."2:\{j.getNome()},\{NumberFormat.getCurrencyInstance(Locale.of("pt", "BR")).format(j.calculaPrecoFinal())}" 
+                : 
+                STR."2:Erro-jogo com nome repetido: \{j.getNome()}");
+
                 scanner.close();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception _) {}
     }
 
     private void lerDadosJogoNome() {
-        Jogo jogo = ludoteca.consultaPorNome(sc.nextLine());
-        if(!(jogo == null)) System.out.println("3:" + jogo.getDescricao());
-        else System.out.println("3:Nome inexistente.");
+        var jogo = ludoteca.consultaPorNome(sc.nextLine());
+        System.out.println(!(jogo == null) ? STR."3:\{jogo.getDescricao()}" : "3:Nome inexistente.");
     }
 
     private void lerDadosAno() {
-        List<Jogo> listaJogosAno = ludoteca.consultaPorAno(sc.nextInt());
+        List<Jogo> listaJogosAno = ludoteca.consultaPorAno(Integer.parseInt(sc.nextLine()));
         
         if (!(listaJogosAno.isEmpty())) listaJogosAno.forEach(jogo -> System.out.println("4:" + jogo.getDescricao()));
         else System.out.println("4:Nenhum jogo encontrado.");
-            
-        sc.nextLine();
     }
 
     private void dadosJogoEletronico() {
@@ -107,25 +105,21 @@ public class ACMEGames {
     }
 
     private void somatorioJogos() {
-        if (!ludoteca.isEmpty()) System.out.println(String.format("6:R$ %.2f", ludoteca.somatorioJogos()));
-        else System.out.println("6:Nenhum jogo encontrado.");
+        System.out.println(!ludoteca.isEmpty() ? STR."6:\{NumberFormat.getCurrencyInstance(Locale.of("pt", "BR")).format(ludoteca.somatorioJogos())}" : "6:Nenhum jogo encontrado.");
     }
 
     private void jogoTabuleiroMaisCaro() {
-        JogoTabuleiro j = ludoteca.jogoTabuleiroMaisCaro();
-        if(!(j == null)) System.out.println(String.format("7:%s,R$ %.2f", j.getNome(), j.calculaPrecoFinal()));
-        else System.out.println("7:Nenhum jogo encontrado.");
+        var j = ludoteca.jogoTabuleiroMaisCaro();
+        System.out.println((j != null) ? STR."7:\{j.getNome()},\{NumberFormat.getCurrencyInstance(Locale.of("pt", "BR")).format(j.calculaPrecoFinal())}" : "7:Nenhum jogo encontrado.");
     }
 
     private void jogoMaisProximoPrecoBase() {
-        Jogo j = ludoteca.jogoMaisProximoPrecoBase();
-        if (j != null) System.out.println(String.format("8:R$ %.2f,%s", ludoteca.mediaPrecoBase(), j.getDescricao()));
-        else System.out.println("8:Nenhum jogo encontrado.");
+        var j = ludoteca.jogoMaisProximoPrecoBase();
+        System.out.println(j != null ? STR."8:\{NumberFormat.getCurrencyInstance(Locale.of("pt", "BR")).format(ludoteca.mediaPrecoBase())},\{j.getDescricao()}" : "8:Nenhum jogo encontrado.");
     }
 
     private void mostrarDadosJogoTabuleiroAntigo() {
-        JogoTabuleiro jogoMaisAntigo = ludoteca.jogoTabuleiroMaisAntigo();
-        if(jogoMaisAntigo!=null) System.out.println("9:" + jogoMaisAntigo.getNome() + "," + jogoMaisAntigo.getAno());
-        else System.out.println("9:Nenhum jogo encontrado.");
+        var jogoMaisAntigo = ludoteca.jogoTabuleiroMaisAntigo();
+        System.out.println(jogoMaisAntigo!=null ? "9:" + jogoMaisAntigo.getNome() + "," + jogoMaisAntigo.getAno() : "9:Nenhum jogo encontrado.");
     }
 }

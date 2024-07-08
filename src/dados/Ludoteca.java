@@ -5,19 +5,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Ludoteca implements Iterador {
+public class Ludoteca {
 
-	private int contador;
 	private List<Jogo> listaJogos;
 
-	public Ludoteca() {
-		listaJogos = new ArrayList<>();
-		contador = 0;
-	}
+	public Ludoteca() {listaJogos = new ArrayList<>();}
 
 	public boolean addJogo(Jogo jogo) {
-		if (listaJogos.stream().anyMatch(x -> jogo.getNome().equals(x.getNome()))) return false;
-		return listaJogos.add(jogo);
+		return (listaJogos.stream().anyMatch(x -> jogo.getNome().equals(x.getNome()))) ? false : listaJogos.add(jogo);
 	}
 	
 	public Jogo consultaPorNome(String nome) {
@@ -76,19 +71,4 @@ public class Ludoteca implements Iterador {
 	}
 
 	public boolean isEmpty() {return listaJogos.isEmpty();}
-
-	@Override
-	public void reset() {contador = 0;}
-
-	@Override
-	public boolean hasNext() {return (contador == listaJogos.size());}
-
-	@Override
-	public Object next() {
-		if (contador < listaJogos.size()) {
-			contador++;
-			return listaJogos.get(contador);
-		}
-		return null;
-	}
 }
