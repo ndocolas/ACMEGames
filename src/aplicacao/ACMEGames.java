@@ -60,7 +60,10 @@ public class ACMEGames {
                 var scanner = new Scanner(linha).useDelimiter(";");
                 var j = new JogoEletronico(scanner.next(), scanner.nextInt(), scanner.nextDouble(), scanner.next(), Categoria.valor(scanner.next()));
 
-                System.out.println(ludoteca.addJogo(j) ? STR."1:\{j.getNome()},\{NumberFormat.getCurrencyInstance(Locale.of("pt", "BR")).format(j.calculaPrecoFinal())}" : STR."1:Erro-jogo com nome repetido: \{j.getNome()}");
+                System.out.println(ludoteca.addJogo(j) ? 
+                STR."1:\{j.getNome()},\{NumberFormat.getCurrencyInstance(Locale.of("pt", "BR")).format(j.calculaPrecoFinal())}" 
+                : 
+                STR."1:Erro-jogo com nome repetido: \{j.getNome()}");
 
                 scanner.close();
             }
@@ -120,6 +123,6 @@ public class ACMEGames {
 
     private void mostrarDadosJogoTabuleiroAntigo() {
         var jogoMaisAntigo = ludoteca.jogoTabuleiroMaisAntigo();
-        System.out.println(jogoMaisAntigo!=null ? "9:" + jogoMaisAntigo.getNome() + "," + jogoMaisAntigo.getAno() : "9:Nenhum jogo encontrado.");
+        System.out.println(jogoMaisAntigo!=null ? STR."9:\{jogoMaisAntigo.getNome()},\{jogoMaisAntigo.getAno()}" : "9:Nenhum jogo encontrado.");
     }
 }
