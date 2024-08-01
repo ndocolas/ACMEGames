@@ -8,9 +8,7 @@ public enum Categoria {
 
 	private String nome;
 
-	private Categoria(String nome) {
-		this.nome = nome;
-	}
+	private Categoria(String nome) {this.nome = nome;}
 
 	public static Categoria valor(String x) {
 		switch (x) {
