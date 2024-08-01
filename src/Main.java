@@ -1,1 +1,1 @@
-public class Main {public static void main(String[] args) {new aplicacao.ACMEGames();}}
+public class Main {void main() {new aplicacao.ACMEGames();}}
